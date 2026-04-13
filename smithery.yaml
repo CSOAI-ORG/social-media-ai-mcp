@@ -1,0 +1,10 @@
+name: social-media-ai-mcp
+description: "MEOK AI Labs — Built by MEOK AI Labs | https://meok.ai"
+vendor: MEOK AI Labs
+homepage: https://meok.ai
+repository: https://github.com/CSOAI-ORG/social-media-ai-mcp
+license: MIT
+categories: [Marketing, Social Media]
+tags: [social-media, social-media-management, content-scheduling, social-analytics]
+runtime: python
+entrypoint: server.py

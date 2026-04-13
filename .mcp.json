@@ -1,0 +1,24 @@
+{
+  "name": "social-media-ai-mcp",
+  "description": "MEOK AI Labs \u2014 Built by MEOK AI Labs | https://meok.ai",
+  "vendor": "MEOK AI Labs",
+  "homepage": "https://meok.ai",
+  "repository": "https://github.com/CSOAI-ORG/social-media-ai-mcp",
+  "runtime": "python",
+  "entrypoint": "server.py",
+  "tools": [
+    "schedule_post",
+    "generate_hashtags",
+    "analyze_engagement",
+    "plan_content_calendar",
+    "get_audience_insights"
+  ],
+  "categories": [
+    "Marketing",
+    "Social Media"
+  ],
+  "pricing": {
+    "free": "50 calls/day",
+    "pro": "$9/mo"
+  }
+}
