@@ -14,10 +14,7 @@ from typing import Optional
 from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP(
-    "social-media-ai",
-    version="1.0.0",
-    description="Social media AI - scheduling, hashtags, engagement, content calendar, audience insights",
-)
+    "social-media-ai")
 
 # ---------------------------------------------------------------------------
 # Rate limiting
@@ -76,8 +73,7 @@ def schedule_post(
     scheduled_time: Optional[str] = None,
     content_type: str = "post",
     hashtags: Optional[list[str]] = None,
-    media_urls: Optional[list[str]] = None,
-) -> dict:
+    media_urls: Optional[list[str]] = None) -> dict:
     """Schedule a social media post with optimal timing suggestions.
 
     Args:
@@ -142,8 +138,7 @@ def generate_hashtags(
     topic: str,
     niche: Optional[str] = None,
     count: int = 15,
-    include_trending: bool = True,
-) -> dict:
+    include_trending: bool = True) -> dict:
     """Generate relevant hashtags for a social media post.
 
     Args:
@@ -197,8 +192,7 @@ def generate_hashtags(
 
 @mcp.tool()
 def analyze_engagement(
-    posts: list[dict],
-) -> dict:
+    posts: list[dict]) -> dict:
     """Analyze engagement metrics across posts to identify top performers.
 
     Args:
@@ -269,8 +263,7 @@ def plan_content_calendar(
     platforms: list[str],
     topics: list[str],
     weeks: int = 4,
-    posts_per_week: int = 5,
-) -> dict:
+    posts_per_week: int = 5) -> dict:
     """Generate a content calendar with post ideas and optimal scheduling.
 
     Args:
@@ -346,8 +339,7 @@ def get_audience_insights(
     followers: int = 1000,
     engagement_rate_pct: float = 3.0,
     niche: str = "general",
-    top_posts: Optional[list[dict]] = None,
-) -> dict:
+    top_posts: Optional[list[dict]] = None) -> dict:
     """Generate audience insights and growth recommendations.
 
     Args:
