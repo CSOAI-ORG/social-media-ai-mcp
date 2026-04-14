@@ -1,10 +1,79 @@
 name: social-media-ai-mcp
-description: "MEOK AI Labs — Built by MEOK AI Labs | https://meok.ai"
-vendor: MEOK AI Labs
-homepage: https://meok.ai
-repository: https://github.com/CSOAI-ORG/social-media-ai-mcp
-license: MIT
-categories: [Marketing, Social Media]
-tags: [social-media, social-media-management, content-scheduling, social-analytics]
-runtime: python
-entrypoint: server.py
+description: '**Content & Engagement Intelligence**'
+version: 1.0.0
+tools:
+- name: schedule_post
+  description: Schedule a social media post with optimal timing suggestions.
+  parameters:
+  - name: platform
+    type: string
+    required: true
+  - name: content
+    type: string
+    required: true
+  - name: scheduled_time
+    type: string
+    required: false
+  - name: content_type
+    type: string
+    required: false
+  - name: hashtags
+    type: array
+    required: false
+  - name: media_urls
+    type: array
+    required: false
+- name: generate_hashtags
+  description: Generate relevant hashtags for a social media post.
+  parameters:
+  - name: topic
+    type: string
+    required: true
+  - name: niche
+    type: string
+    required: false
+  - name: count
+    type: integer
+    required: false
+  - name: include_trending
+    type: boolean
+    required: false
+- name: analyze_engagement
+  description: Analyze engagement metrics across posts to identify top performers.
+  parameters:
+  - name: posts
+    type: array
+    required: true
+- name: plan_content_calendar
+  description: Generate a content calendar with post ideas and optimal scheduling.
+  parameters:
+  - name: platforms
+    type: array
+    required: true
+  - name: topics
+    type: array
+    required: true
+  - name: weeks
+    type: integer
+    required: false
+  - name: posts_per_week
+    type: integer
+    required: false
+- name: get_audience_insights
+  description: Generate audience insights and growth recommendations.
+  parameters:
+  - name: platform
+    type: string
+    required: true
+  - name: followers
+    type: integer
+    required: false
+  - name: engagement_rate_pct
+    type: number
+    required: false
+  - name: niche
+    type: string
+    required: false
+  - name: top_posts
+    type: array
+    required: false

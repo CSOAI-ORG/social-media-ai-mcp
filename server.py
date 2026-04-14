@@ -6,6 +6,11 @@ Post scheduling, hashtag generation, engagement analysis,
 content calendar planning, and audience insights.
 """
 
+
+import sys, os
+sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
+from auth_middleware import check_access
+
 import time
 import hashlib
 from datetime import datetime, timezone, timedelta
@@ -73,7 +78,7 @@ def schedule_post(
     scheduled_time: Optional[str] = None,
     content_type: str = "post",
     hashtags: Optional[list[str]] = None,
-    media_urls: Optional[list[str]] = None) -> dict:
+    media_urls: Optional[list[str]] = None, api_key: str = "") -> dict:
     """Schedule a social media post with optimal timing suggestions.
 
     Args:
@@ -84,6 +89,10 @@ def schedule_post(
         hashtags: List of hashtags to include.
         media_urls: List of media URLs to attach.
     """
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _check_rate_limit():
         return {"error": "Rate limit exceeded. Upgrade to pro tier."}
 
@@ -138,7 +147,7 @@ def generate_hashtags(
     topic: str,
     niche: Optional[str] = None,
     count: int = 15,
-    include_trending: bool = True) -> dict:
+    include_trending: bool = True, api_key: str = "") -> dict:
     """Generate relevant hashtags for a social media post.
 
     Args:
@@ -147,6 +156,10 @@ def generate_hashtags(
         count: Number of hashtags to generate (5-30).
         include_trending: Whether to include high-volume trending tags.
     """
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _check_rate_limit():
         return {"error": "Rate limit exceeded. Upgrade to pro tier."}
 
@@ -192,13 +205,17 @@ def generate_hashtags(
 
 @mcp.tool()
 def analyze_engagement(
-    posts: list[dict]) -> dict:
+    posts: list[dict], api_key: str = "") -> dict:
     """Analyze engagement metrics across posts to identify top performers.
 
     Args:
         posts: List of post data with keys: content, likes, comments, shares,
               impressions, platform, content_type, posted_at (optional).
     """
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _check_rate_limit():
         return {"error": "Rate limit exceeded. Upgrade to pro tier."}
 
@@ -263,7 +280,7 @@ def plan_content_calendar(
     platforms: list[str],
     topics: list[str],
     weeks: int = 4,
-    posts_per_week: int = 5) -> dict:
+    posts_per_week: int = 5, api_key: str = "") -> dict:
     """Generate a content calendar with post ideas and optimal scheduling.
 
     Args:
@@ -272,6 +289,10 @@ def plan_content_calendar(
         weeks: Number of weeks to plan (1-12).
         posts_per_week: Target posts per week per platform.
     """
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _check_rate_limit():
         return {"error": "Rate limit exceeded. Upgrade to pro tier."}
 
@@ -339,7 +360,7 @@ def get_audience_insights(
     followers: int = 1000,
     engagement_rate_pct: float = 3.0,
     niche: str = "general",
-    top_posts: Optional[list[dict]] = None) -> dict:
+    top_posts: Optional[list[dict]] = None, api_key: str = "") -> dict:
     """Generate audience insights and growth recommendations.
 
     Args:
@@ -349,6 +370,10 @@ def get_audience_insights(
         niche: Content niche.
         top_posts: Optional list of top performing posts with keys: content_type, engagement_rate.
     """
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _check_rate_limit():
         return {"error": "Rate limit exceeded. Upgrade to pro tier."}
 

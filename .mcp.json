@@ -1,24 +1,152 @@
 {
   "name": "social-media-ai-mcp",
-  "description": "MEOK AI Labs \u2014 Built by MEOK AI Labs | https://meok.ai",
-  "vendor": "MEOK AI Labs",
-  "homepage": "https://meok.ai",
-  "repository": "https://github.com/CSOAI-ORG/social-media-ai-mcp",
-  "runtime": "python",
-  "entrypoint": "server.py",
+  "description": "**Content & Engagement Intelligence**",
+  "version": "1.0.0",
   "tools": [
-    "schedule_post",
-    "generate_hashtags",
-    "analyze_engagement",
-    "plan_content_calendar",
-    "get_audience_insights"
-  ],
-  "categories": [
-    "Marketing",
-    "Social Media"
-  ],
-  "pricing": {
-    "free": "50 calls/day",
-    "pro": "$9/mo"
-  }
+    {
+      "name": "schedule_post",
+      "description": "Schedule a social media post with optimal timing suggestions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "scheduled_time": {
+            "type": "string",
+            "nullable": true
+          },
+          "content_type": {
+            "type": "string"
+          },
+          "hashtags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "media_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "platform",
+          "content"
+        ]
+      }
+    },
+    {
+      "name": "generate_hashtags",
+      "description": "Generate relevant hashtags for a social media post.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "niche": {
+            "type": "string",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer"
+          },
+          "include_trending": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "topic"
+        ]
+      }
+    },
+    {
+      "name": "analyze_engagement",
+      "description": "Analyze engagement metrics across posts to identify top performers.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "posts": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "posts"
+        ]
+      }
+    },
+    {
+      "name": "plan_content_calendar",
+      "description": "Generate a content calendar with post ideas and optimal scheduling.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "platforms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "weeks": {
+            "type": "integer"
+          },
+          "posts_per_week": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "platforms",
+          "topics"
+        ]
+      }
+    },
+    {
+      "name": "get_audience_insights",
+      "description": "Generate audience insights and growth recommendations.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string"
+          },
+          "followers": {
+            "type": "integer"
+          },
+          "engagement_rate_pct": {
+            "type": "number"
+          },
+          "niche": {
+            "type": "string"
+          },
+          "top_posts": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "nullable": true
+          }
+        },
+        "required": [
+          "platform"
+        ]
+      }
+    }
+  ]
 }
