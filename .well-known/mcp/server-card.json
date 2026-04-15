@@ -1,0 +1,57 @@
+{
+  "name": "social-media-ai",
+  "description": "\u0001",
+  "version": "1.0.0",
+  "protocol_version": "2025-11-25",
+  "publisher": {
+    "name": "MEOK AI Labs",
+    "url": "https://meok.ai",
+    "email": "nicholas@meok.ai"
+  },
+  "repository": "https://github.com/CSOAI-ORG/social-media-ai-mcp",
+  "license": "MIT",
+  "transport": [
+    "stdio",
+    "streamable-http"
+  ],
+  "authentication": {
+    "type": "api-key",
+    "free_tier": true,
+    "free_limit": "15 calls/day"
+  },
+  "tools": [
+    {
+      "name": "schedule_post",
+      "description": "Schedule a social media post with optimal timing suggestions."
+    },
+    {
+      "name": "generate_hashtags",
+      "description": "Generate relevant hashtags for a social media post."
+    },
+    {
+      "name": "analyze_engagement",
+      "description": "Analyze engagement metrics across posts to identify top performers."
+    },
+    {
+      "name": "plan_content_calendar",
+      "description": "Generate a content calendar with post ideas and optimal scheduling."
+    },
+    {
+      "name": "get_audience_insights",
+      "description": "Generate audience insights and growth recommendations."
+    }
+  ],
+  "categories": [
+    "AI & Machine Learning",
+    "Content & Media"
+  ],
+  "pricing": {
+    "free": {
+      "calls_per_day": 15
+    },
+    "pro": {
+      "price": "$29/month",
+      "url": "https://meok.ai/pricing"
+    }
+  }
+}
