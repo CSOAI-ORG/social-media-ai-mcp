@@ -1,0 +1,10 @@
+{
+  "name": "social-media-ai-mcp",
+  "description": "MEOK AI Labs \u2014 social-media-ai-mcp",
+  "vendor": "MEOK AI Labs",
+  "homepage": "https://meok.ai",
+  "repository": "https://github.com/CSOAI-ORG/social-media-ai-mcp",
+  "license": "MIT",
+  "runtime": "python",
+  "entryPoint": "mcp-wrapper.py"
+}
