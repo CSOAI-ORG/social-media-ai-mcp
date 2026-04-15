@@ -18,8 +18,7 @@ from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP(
-    "social-media-ai")
+mcp = FastMCP("social-media-ai", instructions="")
 
 # ---------------------------------------------------------------------------
 # Rate limiting
