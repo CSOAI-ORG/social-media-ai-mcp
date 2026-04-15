@@ -1,7 +1,7 @@
 {
   "name": "social-media-ai-mcp",
   "version": "1.0.0",
-  "description": "MEOK AI Labs — social media MCP Server",
+  "description": "Social Media Ai tools for AI agents. Capabilities: schedule post, generate hashtags, analyze engagement. Built by MEOK AI Labs.",
   "main": "server.py",
   "mcp": {
     "name": "social media",
@@ -9,10 +9,22 @@
     "homepage": "https://meok.ai",
     "repository": "https://github.com/CSOAI-ORG/social-media-ai-mcp",
     "runtime": "python",
-    "tags": ["mcp", "mcp-server", "meok-ai-labs", "ai-tools"]
+    "tags": [
+      "mcp",
+      "mcp-server",
+      "meok-ai-labs",
+      "ai-tools"
+    ]
   },
-  "keywords": ["mcp", "mcp-server", "meok-ai-labs"],
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "meok-ai-labs"
+  ],
   "author": "MEOK AI Labs <nicholas@meok.ai>",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/CSOAI-ORG/social-media-ai-mcp"}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CSOAI-ORG/social-media-ai-mcp"
+  }
 }

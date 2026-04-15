@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 [project]
 name = "social-media-ai-mcp"
 version = "1.0.0"
-description = "MEOK AI Labs — social-media-ai-mcp"
+description = "Social Media Ai tools for AI agents. Capabilities: schedule post, generate hashtags, analyze engagement. Built by MEOK AI Labs."
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
 authors = [{name = "MEOK AI Labs", email = "nicholas@meok.ai"}]

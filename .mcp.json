@@ -1,6 +1,6 @@
 {
   "name": "social-media-ai-mcp",
-  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 \u0001",
+  "description": "Social Media Ai tools for AI agents. Capabilities: schedule post, generate hashtags, analyze engagement. Built by MEOK AI Labs.",
   "version": "1.0.0",
   "tools": [
     {
