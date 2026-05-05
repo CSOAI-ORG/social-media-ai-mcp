@@ -1,60 +1,38 @@
-# Social Media AI MCP Server
+<div align="center">
 
-**Content & Engagement Intelligence**
+[![GitHub stars](https://img.shields.io/github/stars/CSOAI-ORG/social-media-ai-mcp)](https://github.com/CSOAI-ORG/social-media-ai-mcp/stargazers)
 
-Built by [MEOK AI Labs](https://meok.ai)
+# usocialU mediaU aiU mcp
+
+****Content & Engagement Intelligence****
+
+[![npm version](https://img.shields.io/npm/v/@meok-ai/social-media-ai-mcp)](https://www.npmjs.com/package/@meok-ai/social-media-ai-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-255+_servers-purple)](https://meok.ai)
+
+[Installation](#installation) · [Docs](https://csoai.org) · [Report Bug](https://github.com/CSOAI-ORG/social-media-ai-mcp/issues)
+
+</div>
 
 ---
 
-An MCP server for social media managers and content creators. Schedule posts at optimal times, generate hashtag strategies, analyze engagement metrics, plan content calendars, and get audience growth insights across Instagram, Twitter, LinkedIn, Facebook, and TikTok.
-
-## Tools
-
-| Tool | Description |
-|------|-------------|
-| `schedule_post` | Schedule posts with optimal timing suggestions per platform |
-| `generate_hashtags` | Generate stratified hashtag sets by reach volume |
-| `analyze_engagement` | Analyze engagement metrics to identify top-performing content |
-| `plan_content_calendar` | Generate multi-week content calendars with topic rotation |
-| `get_audience_insights` | Audience analysis with growth projections and content recommendations |
-
-## Quick Start
+## Installation
 
 ```bash
 pip install social-media-ai-mcp
+# or
+npm install -g @meok-ai/social-media-ai-mcp
 ```
 
-### Claude Desktop
+## Quick Start
 
-```json
-{
-  "mcpServers": {
-    "social-media-ai": {
-      "command": "python",
-      "args": ["-m", "server"],
-      "cwd": "/path/to/social-media-ai-mcp"
-    }
-  }
-}
-```
+See the project repository for full documentation and examples.
 
-### Direct Usage
+## Enterprise Support
 
-```bash
-python server.py
-```
-
-## Rate Limits
-
-| Tier | Requests/Hour |
-|------|--------------|
-| Free | 60 |
-| Pro | 5,000 |
+- 📧 nicholas@csoai.org
+- 🌐 [CSOAI.org](https://csoai.org)
 
 ## License
 
-MIT - see [LICENSE](LICENSE)
-
----
-
-*Part of the MEOK AI Labs MCP Marketplace*
+MIT © [CSOAI](https://csoai.org)
