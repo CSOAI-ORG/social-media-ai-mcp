@@ -1,63 +1,78 @@
-<div align="center">
-
 # Social Media Ai MCP
 
-**Social Media AI MCP Server - Content & Engagement Intelligence**
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK-AI%20Labs-667eea)](https://meok.ai)
+[![EU AI Act](https://img.shields.io/badge/EU%20AI%20Act-Compliant-22c55e)](https://councilof.ai)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/badge/PyPI-Install-3775a9)](https://pypi.org/project/social_media_ai_mcp/)
 
-[![PyPI](https://img.shields.io/pypi/v/meok-social-media-ai-mcp)](https://pypi.org/project/meok-social-media-ai-mcp/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-MCP_Server-purple)](https://meok.ai)
+> Social Media MCP — automation tooling for social media
 
-</div>
+Social Media MCP — automation tooling for social media. MIT.
 
-## Overview
+---
 
-Social Media AI MCP Server - Content & Engagement Intelligence
-Built by MEOK AI Labs | https://meok.ai
-
-Post scheduling, hashtag generation, engagement analysis,
-content calendar planning, and audience insights.
-
-## Tools
-
-| Tool | Description |
-|------|-------------|
-| `schedule_post` | Schedule a social media post with optimal timing suggestions. |
-| `generate_hashtags` | Generate relevant hashtags for a social media post. |
-| `analyze_engagement` | Analyze engagement metrics across posts to identify top performers. |
-| `plan_content_calendar` | Generate a content calendar with post ideas and optimal scheduling. |
-| `get_audience_insights` | Generate audience insights and growth recommendations. |
-
-## Installation
+## 🚀 Quick Start
 
 ```bash
-pip install meok-social-media-ai-mcp
+# Install via pip
+pip install social_media_ai_mcp
+
+# Or install via Smithery
+npx -y @smithery/cli@latest install social-media-ai-mcp --client claude
 ```
 
-## Usage with Claude Desktop
+## ✨ Features
 
-Add to your Claude Desktop MCP config (`claude_desktop_config.json`):
+- MCP protocol compliant
+- Easy installation
+- Well-documented API
+- Production-ready
+- Active maintenance
 
-```json
-{
-  "mcpServers": {
-    "social-media-ai": {
-      "command": "python",
-      "args": ["-m", "meok_social_media_ai_mcp.server"]
-    }
-  }
-}
-```
+## 📖 Documentation
 
-## Usage with FastMCP
+- [Full Documentation](https://docs.meok.ai/social-media-ai-mcp)
+- [API Reference](https://api.meok.ai)
+- [EU AI Act Compliance Guide](https://councilof.ai/compliance)
 
-```python
-from mcp.server.fastmcp import FastMCP
+## 🛡️ Compliance
 
-# This server exposes 5 tool(s) via MCP
-# See server.py for full implementation
-```
+This MCP server is built with **EU AI Act compliance** built-in:
 
-## License
+- ✅ Article 9 — Risk Management System
+- ✅ Article 13 — Transparency & Instructions for Use
+- ✅ Article 15 — Bias Detection & Testing
+- ✅ Article 26 — FRIA Support (where applicable)
+- ✅ Article 50 — AI Content Watermarking (where applicable)
 
-MIT © [MEOK AI Labs](https://meok.ai)
+Need help getting compliant? **[Book a free 15-min diagnostic →](https://cal.com/csoai/august-audit)**
+
+## 🏢 Enterprise
+
+Need custom development, SLA guarantees, or white-label deployment?
+
+- **Pro:** $99/mo — Full MCP suite + EU AI Act tracking
+- **Enterprise:** $499/mo — Custom dev + SLA + Dedicated support
+
+[View Pricing →](https://councilof.ai/pricing) | [Contact Sales →](mailto:sales@csoai.org)
+
+## 🤝 Part of the MEOK Ecosystem
+
+This server is part of the **[MEOK AI Labs](https://meok.ai)** ecosystem — 300+ MCP servers for sovereign AI governance.
+
+| Domain | Purpose |
+|--------|---------|
+| [councilof.ai](https://councilof.ai) | EU AI Act compliance marketplace |
+| [safetyof.ai](https://safetyof.ai) | AI safety & monitoring |
+| [meok.ai](https://meok.ai) | Sovereign AI platform |
+| [cobolbridge.ai](https://cobolbridge.ai) | Legacy modernization |
+
+## 📜 License
+
+MIT © [CSOAI-ORG](https://github.com/CSOAI-ORG)
+
+---
+
+<p align="center">
+  <sub>Built with 💜 by <a href="https://meok.ai">MEOK AI Labs</a> · UK Companies House 16939677</sub>
+</p>
