@@ -1,0 +1,68 @@
+{
+  "name": "social-media-ai-mcp",
+  "description": "Social Media Ai MCP Server by MEOK AI Labs",
+  "url": "https://proofof.ai/scorecard/social-media-ai-mcp.html",
+  "version": "1.0.6",
+  "protocolVersion": "0.2.0",
+  "provider": {
+    "organization": "MEOK AI Labs",
+    "url": "https://meok.ai"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [
+    {
+      "id": "schedule_post",
+      "name": "Schedule Post",
+      "description": "schedule_post via social-media-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "generate_hashtags",
+      "name": "Generate Hashtags",
+      "description": "generate_hashtags via social-media-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "analyze_engagement",
+      "name": "Analyze Engagement",
+      "description": "analyze_engagement via social-media-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "plan_content_calendar",
+      "name": "Plan Content Calendar",
+      "description": "plan_content_calendar via social-media-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "get_audience_insights",
+      "name": "Get Audience Insights",
+      "description": "get_audience_insights via social-media-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    }
+  ]
+}

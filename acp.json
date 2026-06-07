@@ -1,0 +1,23 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "social-media-ai-mcp",
+    "description": "Social Media Ai MCP Server by MEOK AI Labs",
+    "version": "1.0.6",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "social-media-ai-mcp"
+      }
+    ],
+    "capabilities": [
+      "schedule_post",
+      "generate_hashtags",
+      "analyze_engagement",
+      "plan_content_calendar",
+      "get_audience_insights"
+    ]
+  }
+}
