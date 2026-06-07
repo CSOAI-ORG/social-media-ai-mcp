@@ -1,0 +1,9 @@
+# social-media-ai-mcp - Auto-trigger Rules
+
+When the user asks about social media, use social-media-ai-mcp tools: schedule_post, generate_hashtags, analyze_engagement, plan_content_calendar, get_audience_insights
+
+**Social Media AI MCP Server - Content & Engagement Intelligence**
+
+Install: `pip install social-media-ai-mcp`
+
+By MEOK AI Labs — MIT licensed.

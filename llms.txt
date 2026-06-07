@@ -1,0 +1,36 @@
+# social-media-ai-mcp
+# **Social Media AI MCP Server - Content & Engagement Intelligence**
+
+## Install
+```bash
+pip install social-media-ai-mcp
+```
+
+## Auth & Rate Limits
+- Free tier: 10 calls/day. No API key required.
+- Pro tier (£79/mo): unlimited + signed attestations.
+- Enterprise (£1,499/mo): white-label.
+
+## Tools
+
+### `schedule_post`
+Schedule a social media post with optimal timing suggestions.
+
+### `generate_hashtags`
+Generate relevant hashtags for a social media post.
+
+### `analyze_engagement`
+Analyze engagement metrics across posts to identify top performers.
+
+### `plan_content_calendar`
+Generate a content calendar with post ideas and optimal scheduling.
+
+### `get_audience_insights`
+Generate audience insights and growth recommendations.
+
+
+## Maintainer
+MEOK AI Labs · hello@meok.ai · https://meok.ai · MIT licensed
+
+## Pairs with
+Governance moat: pair this tool with any of MEOK's 38 governance MCPs (EU AI Act, DORA, NIS2, CRA, GDPR, ISO 42001, etc.) for full compliance coverage.

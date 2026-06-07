@@ -1,0 +1,28 @@
+{
+  "name": "social-media-ai-mcp",
+  "title": "Social Media Ai Mcp",
+  "description": "Social Media Ai tools for AI agents. Capabilities: schedule post, generate hashtags, analyze engagement. Built by MEOK AI Labs.",
+  "version": "1.0.6",
+  "homepage": "https://meok.ai",
+  "license": "MIT",
+  "transport": {
+    "type": "stdio"
+  },
+  "tools": [
+    {
+      "name": "schedule_post"
+    },
+    {
+      "name": "generate_hashtags"
+    },
+    {
+      "name": "analyze_engagement"
+    },
+    {
+      "name": "plan_content_calendar"
+    },
+    {
+      "name": "get_audience_insights"
+    }
+  ]
+}
