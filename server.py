@@ -1,4 +1,6 @@
 """
+Buy Pro: https://www.csoai.org/checkout
+
 Social Media AI MCP Server - Content & Engagement Intelligence
 Built by MEOK AI Labs | https://meok.ai
 
