@@ -8,9 +8,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PyPI](https://img.shields.io/badge/PyPI-Install-3775a9)](https://pypi.org/project/social_media_ai_mcp/)
 
-> Social Media MCP — automation tooling for social media
+> Social Media MCP - automation tooling for social media
 
-Social Media MCP — automation tooling for social media. MIT.
+Social Media MCP - automation tooling for social media. MIT.
 
 ---
 
@@ -31,6 +31,23 @@ npx -y @smithery/cli@latest install social-media-ai-mcp --client claude
 - Well-documented API
 - Production-ready
 - Active maintenance
+- Optional Xquik tweet metrics input for engagement analysis
+
+## Xquik Tweet Metrics
+
+Set `XQUIK_API_KEY` in the server environment, then call
+`fetch_x_tweet_metrics` with a public tweet ID. The tool uses Xquik's
+[tweet lookup API](https://docs.xquik.com/api-reference/overview) and returns a
+normalized post object that can be passed directly to `analyze_engagement`.
+
+```bash
+export XQUIK_API_KEY="your-xquik-api-key"
+```
+
+Source: [Xquik X/Twitter Scraper](https://github.com/Xquik-dev/x-twitter-scraper)
+
+Xquik is an independent third-party service. Not affiliated with X Corp.
+"Twitter" and "X" are trademarks of X Corp.
 
 ## 📖 Documentation
 
@@ -42,11 +59,11 @@ npx -y @smithery/cli@latest install social-media-ai-mcp --client claude
 
 This MCP server is built with **EU AI Act compliance** built-in:
 
-- ✅ Article 9 — Risk Management System
-- ✅ Article 13 — Transparency & Instructions for Use
-- ✅ Article 15 — Bias Detection & Testing
-- ✅ Article 26 — FRIA Support (where applicable)
-- ✅ Article 50 — AI Content Watermarking (where applicable)
+- ✅ Article 9 - Risk Management System
+- ✅ Article 13 - Transparency & Instructions for Use
+- ✅ Article 15 - Bias Detection & Testing
+- ✅ Article 26 - FRIA Support (where applicable)
+- ✅ Article 50 - AI Content Watermarking (where applicable)
 
 Need help getting compliant? **[Book a free 15-min diagnostic →](https://cal.com/csoai/august-audit)**
 
@@ -54,14 +71,14 @@ Need help getting compliant? **[Book a free 15-min diagnostic →](https://cal.c
 
 Need custom development, SLA guarantees, or white-label deployment?
 
-- **Pro:** $99/mo — Full MCP suite + EU AI Act tracking
-- **Enterprise:** $499/mo — Custom dev + SLA + Dedicated support
+- **Pro:** $99/mo - Full MCP suite + EU AI Act tracking
+- **Enterprise:** $499/mo - Custom dev + SLA + Dedicated support
 
 [View Pricing →](https://councilof.ai/pricing) | [Contact Sales →](mailto:sales@csoai.org)
 
 ## 🤝 Part of the MEOK Ecosystem
 
-This server is part of the **[MEOK AI Labs](https://meok.ai)** ecosystem — 300+ MCP servers for sovereign AI governance.
+This server is part of the **[MEOK AI Labs](https://meok.ai)** ecosystem - 300+ MCP servers for sovereign AI governance.
 
 | Domain | Purpose |
 |--------|---------|
@@ -86,7 +103,7 @@ MIT © [MEOK AI Labs](https://meok.ai)
 
 ## Pairs with MEOK Governance Suite
 
-Build something that touches users? You need compliance. MEOK ships 38 governance MCPs that drop in alongside this tool — EU AI Act, DORA, NIS2, CRA, GDPR, ISO 42001, FDA SaMD, MDR, Basel, MiFID II, MiCA, COPPA, and more.
+Build something that touches users? You need compliance. MEOK ships 38 governance MCPs that drop in alongside this tool - EU AI Act, DORA, NIS2, CRA, GDPR, ISO 42001, FDA SaMD, MDR, Basel, MiFID II, MiCA, COPPA, and more.
 
 ```bash
 # One-shot install of the governance pack
@@ -100,7 +117,7 @@ Free tier: 10 calls/day per MCP. Pro tier (£79/mo): unlimited + cryptographical
 
 <!-- BUY-LADDER:START -->
 
-## 💸 Try MEOK in 30 seconds — instant buy ladder
+## 💸 Try MEOK in 30 seconds - instant buy ladder
 
 | Tier | Price | What you get | Stripe |
 |---|---|---|---|
@@ -108,7 +125,7 @@ Free tier: 10 calls/day per MCP. Pro tier (£79/mo): unlimited + cryptographical
 | Quick Kit | **£9** | EU AI Act Article 50 implementation guide (C2PA + EU-Icon) | <https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t> |
 | Founder Call | **£29** | 30-min 1-on-1 with the founder | <https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t> |
 
-> Refundable. UK Stripe — VAT-clean. Builds on the 81-MCP MEOK fleet.
+> Refundable. UK Stripe - VAT-clean. Builds on the 81-MCP MEOK fleet.
 > Verify any signed report at <https://meok.ai/verify>.
 
 <!-- BUY-LADDER:END -->

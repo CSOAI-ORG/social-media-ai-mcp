@@ -9,19 +9,22 @@ content calendar planning, and audience insights.
 """
 
 
-import sys, os
-from auth_middleware import check_access
-
+import json
+import os
+import re
+import urllib.error
+import urllib.request
 import time
-import hashlib
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
+from auth_middleware import check_access
 from mcp.server.fastmcp import FastMCP
-import urllib.request as _meter_urlreq
-import urllib.error as _meter_urlerr
 
-mcp = FastMCP("social-media-ai", instructions="")
+mcp = FastMCP(
+    "social-media-ai",
+    instructions="Analyze social-media content, scheduling, and engagement.",
+)
 
 # ---------------------------------------------------------------------------
 # Rate limiting
@@ -71,6 +74,53 @@ _CONTENT_TYPES = {
 }
 
 _SCHEDULED_POSTS: list[dict] = []
+_XQUIK_TWEET_URL = "https://xquik.com/api/v1/x/tweets/{tweet_id}"
+_XQUIK_TWEET_ID_PATTERN = re.compile(r"\d{15,20}")
+
+
+def _safe_int(value: object) -> int:
+    if value is None:
+        return 0
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _xquik_tweet_to_post(payload: object) -> dict | None:
+    if not isinstance(payload, dict):
+        return None
+    tweet = payload.get("tweet", payload)
+    author = payload.get("author", {})
+    if not isinstance(tweet, dict) or not isinstance(author, dict):
+        return None
+    tweet_id = str(tweet.get("id", ""))
+    username = str(author.get("username", "")).lstrip("@")
+    likes = _safe_int(tweet.get("likeCount"))
+    replies = _safe_int(tweet.get("replyCount"))
+    retweets = _safe_int(tweet.get("retweetCount"))
+    quotes = _safe_int(tweet.get("quoteCount"))
+    views = _safe_int(tweet.get("viewCount")) or 1
+    post = {
+        "platform": "twitter",
+        "content": tweet.get("text", ""),
+        "content_type": "post",
+        "posted_at": tweet.get("createdAt"),
+        "likes": likes,
+        "comments": replies,
+        "shares": retweets + quotes,
+        "impressions": views,
+        "tweet_id": tweet_id,
+        "retweets": retweets,
+        "quotes": quotes,
+        "bookmarks": _safe_int(tweet.get("bookmarkCount")),
+        "source": "xquik",
+    }
+    if username:
+        post["author_username"] = username
+    if username and tweet_id:
+        post["url"] = f"https://x.com/{username}/status/{tweet_id}"
+    return post
 
 def _server_meter_check(api_key: str = "") -> dict:
     """Calls the live /verify endpoint for server-side metering. Returns the JSON dict.
@@ -78,9 +128,9 @@ def _server_meter_check(api_key: str = "") -> dict:
     (so the local rate-limit in _check_rate_limit remains the safety net)."""
     try:
         data = json.dumps({"api_key": api_key, "tool": ""}).encode()
-        req = _meter_urlreq.Request(_METER_URL, data=data,
+        req = urllib.request.Request(_METER_URL, data=data,
             headers={"Content-Type": "application/json"}, method="POST")
-        with _meter_urlreq.urlopen(req, timeout=2.5) as r:
+        with urllib.request.urlopen(req, timeout=2.5) as r:
             d = json.loads(r.read())
             if isinstance(d, dict) and "allowed" in d:
                 return d
@@ -111,7 +161,7 @@ def schedule_post(
         media_urls: List of media URLs to attach.
 
     Behavior:
-        This tool is read-only and stateless — it produces analysis output
+        This tool is read-only and stateless - it produces analysis output
         without modifying any external systems, databases, or files.
         Safe to call repeatedly with identical inputs (idempotent).
         Free tier: 10/day rate limit. Pro tier: unlimited.
@@ -134,7 +184,7 @@ def schedule_post(
           included in responses (X-RateLimit-Remaining, X-RateLimit-Reset).
         - Error Handling: Returns structured error objects with 'error' key on failure.
           Never raises unhandled exceptions. Invalid inputs return descriptive validation errors.
-        - Idempotency: Fully idempotent — calling with the same inputs always produces the
+        - Idempotency: Fully idempotent - calling with the same inputs always produces the
           same output. Safe to retry on timeout or transient failure.
         - Data Privacy: No input data is stored, logged, or transmitted to external services.
           All processing happens locally within the MCP server process.
@@ -229,7 +279,7 @@ def generate_hashtags(
           included in responses (X-RateLimit-Remaining, X-RateLimit-Reset).
         - Error Handling: Returns structured error objects with 'error' key on failure.
           Never raises unhandled exceptions. Invalid inputs return descriptive validation errors.
-        - Idempotency: Fully idempotent — calling with the same inputs always produces the
+        - Idempotency: Fully idempotent - calling with the same inputs always produces the
           same output. Safe to retry on timeout or transient failure.
         - Data Privacy: No input data is stored, logged, or transmitted to external services.
           All processing happens locally within the MCP server process.
@@ -272,7 +322,7 @@ def generate_hashtags(
         },
         "tips": [
             "Mix high, medium, and low volume hashtags",
-            f"Instagram: use up to 30, optimal is 9-15",
+            "Instagram: use up to 30, optimal is 9-15",
             "Twitter: use 1-3 hashtags max",
             "LinkedIn: use 3-5 hashtags",
             "Rotate hashtags to avoid shadowbanning",
@@ -291,7 +341,7 @@ def analyze_engagement(
               impressions, platform, content_type, posted_at (optional).
 
     Behavior:
-        This tool is read-only and stateless — it produces analysis output
+        This tool is read-only and stateless - it produces analysis output
         without modifying any external systems, databases, or files.
         Safe to call repeatedly with identical inputs (idempotent).
         Free tier: 10/day rate limit. Pro tier: unlimited.
@@ -314,7 +364,7 @@ def analyze_engagement(
           included in responses (X-RateLimit-Remaining, X-RateLimit-Reset).
         - Error Handling: Returns structured error objects with 'error' key on failure.
           Never raises unhandled exceptions. Invalid inputs return descriptive validation errors.
-        - Idempotency: Fully idempotent — calling with the same inputs always produces the
+        - Idempotency: Fully idempotent - calling with the same inputs always produces the
           same output. Safe to retry on timeout or transient failure.
         - Data Privacy: No input data is stored, logged, or transmitted to external services.
           All processing happens locally within the MCP server process.
@@ -383,6 +433,63 @@ def analyze_engagement(
 
 
 @mcp.tool()
+def fetch_x_tweet_metrics(
+    tweet_id: str,
+    api_key: str = "",
+) -> dict:
+    """Fetch public X/Twitter tweet metrics and normalize them for engagement analysis.
+
+    Args:
+        tweet_id: Public X/Twitter tweet ID containing 15 to 20 digits.
+
+    Behavior:
+        This tool reads public tweet metadata from Xquik and returns a single
+        post object that can be passed directly to analyze_engagement.
+    """
+    normalized_tweet_id = tweet_id.strip()
+    if _XQUIK_TWEET_ID_PATTERN.fullmatch(normalized_tweet_id) is None:
+        return {"error": "Provide a valid 15 to 20 digit tweet_id."}
+
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
+    if not _check_rate_limit():
+        return {"error": "Rate limit exceeded. Upgrade to pro tier."}
+
+    api_token = os.getenv("XQUIK_API_KEY", "").strip()
+    if not api_token:
+        return {"error": "Set XQUIK_API_KEY in the server environment."}
+
+    request = urllib.request.Request(
+        _XQUIK_TWEET_URL.format(tweet_id=normalized_tweet_id),
+        headers={"Accept": "application/json", "x-api-key": api_token},
+        method="GET",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        return {"error": "Xquik request failed.", "status": exc.code}
+    except urllib.error.URLError:
+        return {"error": "Xquik request failed."}
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return {"error": "Xquik returned invalid JSON."}
+
+    post = _xquik_tweet_to_post(payload)
+    if post is None:
+        return {"error": "Xquik returned an unexpected response."}
+    return {
+        "tweet_id": normalized_tweet_id,
+        "source": "xquik",
+        "post": post,
+        "analyze_engagement_input": [post],
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+@mcp.tool()
 def plan_content_calendar(
     platforms: list[str],
     topics: list[str],
@@ -419,7 +526,7 @@ def plan_content_calendar(
           included in responses (X-RateLimit-Remaining, X-RateLimit-Reset).
         - Error Handling: Returns structured error objects with 'error' key on failure.
           Never raises unhandled exceptions. Invalid inputs return descriptive validation errors.
-        - Idempotency: Fully idempotent — calling with the same inputs always produces the
+        - Idempotency: Fully idempotent - calling with the same inputs always produces the
           same output. Safe to retry on timeout or transient failure.
         - Data Privacy: No input data is stored, logged, or transmitted to external services.
           All processing happens locally within the MCP server process.
@@ -430,6 +537,9 @@ def plan_content_calendar(
 
     if not _check_rate_limit():
         return {"error": "Rate limit exceeded. Upgrade to pro tier."}
+
+    if not topics:
+        return {"error": "Provide at least one content topic."}
 
     weeks = min(12, max(1, weeks))
     calendar = []
@@ -528,7 +638,7 @@ def get_audience_insights(
           included in responses (X-RateLimit-Remaining, X-RateLimit-Reset).
         - Error Handling: Returns structured error objects with 'error' key on failure.
           Never raises unhandled exceptions. Invalid inputs return descriptive validation errors.
-        - Idempotency: Fully idempotent — calling with the same inputs always produces the
+        - Idempotency: Fully idempotent - calling with the same inputs always produces the
           same output. Safe to retry on timeout or transient failure.
         - Data Privacy: No input data is stored, logged, or transmitted to external services.
           All processing happens locally within the MCP server process.
@@ -607,18 +717,10 @@ def get_audience_insights(
     }
 
 
-def main():
-    mcp.run()
-
-if __name__ == '__main__':
-    main()
-
-
 # ── MEOK monetization layer (Stripe upgrade · PAYG · pricing) ──────────
 # Free tier is zero-config. Upgrade to Pro (unlimited) or pay-as-you-go per call.
-import os as _meok_os
 MEOK_STRIPE_UPGRADE = "https://buy.stripe.com/aFa7sNcgAdQS0ZT1Uc8k91t"  # Pro (unlimited)
-MEOK_PAYG_KEY = _meok_os.environ.get("MEOK_PAYG_KEY", "")  # set to enable PAYG (x402 / ~GBP0.05 per call)
+MEOK_PAYG_KEY = os.environ.get("MEOK_PAYG_KEY", "")  # set to enable PAYG (x402 / ~GBP0.05 per call)
 MEOK_PRICING = "https://meok.ai/pricing"
 
 
@@ -629,3 +731,11 @@ def meok_upsell(tier: str = "free") -> dict:
     return {"upgrade_url": MEOK_STRIPE_UPGRADE,
             "payg_enabled": bool(MEOK_PAYG_KEY),
             "pricing": MEOK_PRICING}
+
+
+def main() -> None:
+    mcp.run()
+
+
+if __name__ == "__main__":
+    main()

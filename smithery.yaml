@@ -45,6 +45,12 @@ tools:
   - name: posts
     type: array
     required: true
+- name: fetch_x_tweet_metrics
+  description: Fetch public X/Twitter tweet metrics from Xquik for engagement analysis.
+  parameters:
+  - name: tweet_id
+    type: string
+    required: true
 - name: plan_content_calendar
   description: Generate a content calendar with post ideas and optimal scheduling.
   parameters:
@@ -88,6 +94,9 @@ startCommand:
       apiKey:
         type: string
         description: Your MEOK API Key
+      xquikApiKey:
+        type: string
+        description: Optional Xquik API key for tweet metrics
   commandFunction: "(config) => ({\n  command: 'uvx',\n  args: ['social-media-ai-mcp',\
-    \ '--api-key', config.apiKey],\n  env: {\n    MEOK_API_KEY: config.apiKey\n  }\n\
-    })"
+    \ '--api-key', config.apiKey],\n  env: {\n    MEOK_API_KEY: config.apiKey,\n\
+    \    XQUIK_API_KEY: config.xquikApiKey || ''\n  }\n})"
